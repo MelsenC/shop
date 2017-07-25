@@ -1,9 +1,28 @@
-<section class="todoapp">
+<section class="shopapp">
   <header class="header">
     <h1>Shopping List</h1>
   </header>
 
   <section class="main">
+    <ul class="shopping-list">
 
+    </ul>
   </section>
 </section>
+
+<script>
+  $(function() {
+    $.get("/items").success( function(data) {
+      var htmlString = "";
+
+      $.each(data, function(index, item){
+        var liElement = '<li><div class="view"><input class="toggle" type="checkbox"><label>' +
+          item.title +
+          '</label></div></li>';
+        htmlString += liElement;
+      });
+      var ulItems = $('.shopping-list');
+      ulItems.html(htmlString);
+    });
+  });
+</script>

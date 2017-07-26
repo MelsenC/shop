@@ -16,7 +16,10 @@
       var htmlString = "";
 
       $.each(data, function(index, item){
-        var liElement = '<li><div class="view"><input class="toggle" type="checkbox"><label>' +
+        var checkedStatus = item.done ? "checked" : "";
+        var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' + 
+          checkedStatus +
+          '><label>' +
           item.title +
           '</label></div></li>';
         htmlString += liElement;

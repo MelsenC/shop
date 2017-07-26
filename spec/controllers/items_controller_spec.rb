@@ -11,4 +11,14 @@ RSpec.describe ItemsController, type: :controller do
       expect(response_value.count).to eq(2)
     end
   end
+
+  describe "items#update" do
+    it "should allow tasks to be marked as done" do
+      item = FactoryGirl.create(:item, done: false)
+      put :update, id: item.id, item: { done: true }
+      expect(response).to have_http_status(:success)
+      item.reload
+      expect(item.done).to eq(true)
+    end
+  end
 end

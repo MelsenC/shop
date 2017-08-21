@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    render json: Item.all
+    render json: Item.order(:id)
   end
 
   def update

@@ -18,6 +18,7 @@
       $.each(data, function(index, item){
         var checkedStatus = item.done ? "checked" : "";
         var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' + 
+          " data-id='" + item.id + "'" +
           checkedStatus +
           '><label>' +
           item.title +
@@ -26,6 +27,21 @@
       });
       var ulItems = $('.shopping-list');
       ulItems.html(htmlString);
+
+      $('.toggle').change(function(e) {
+        var itemId = $(e.target).data("id");
+        console.log(itemId);
+
+        var doneValue = Boolean($(e.target).is(':checked'));
+        console.log("done:", doneValue);
+
+        $.post("/items/" + itemId, {
+          _method: "PUT",
+          item: {
+            done: doneValue
+          }
+        });
+      });
     });
   });
 </script>

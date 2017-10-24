@@ -18,7 +18,14 @@
     $('#new-form').submit(function(event) {
       event.preventDefault();
       var textbox = $('.new-item');
-      console.log("Task: ", textbox.val());
+      var payload = {
+        item: {
+          title: textbox.val()
+        }
+      };
+      $.post("/items", payload).success(function(data) {
+        console.log("Successful HTTP Request");
+      });
     });
 
 

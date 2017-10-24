@@ -26,4 +26,14 @@ RSpec.describe ItemsController, type: :controller do
       expect(item.done).to eq(true)
     end
   end
+
+  describe "item#create" do
+    it "should allow new tasks to be created" do
+      post :create, item: {title: "Fix things"}
+      expect(response).to have_http_status(:success)
+      response_value = ActiveSupport::JSON.decode(@response.body)
+      expect(response_value['title']).to eq("Fix things")
+      expect(Item.last.title).to eq("Fix things")
+    end
+  end
 end

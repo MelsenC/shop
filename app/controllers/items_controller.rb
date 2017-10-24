@@ -9,9 +9,14 @@ class ItemsController < ApplicationController
     render json: item
   end
 
+  def create
+    item = Item.create(item_params)
+    render json: item
+  end
+
   private
 
   def item_params
-    params.require(:item).permit(:done)
+    params.require(:item).permit(:done, :title)
   end
 end

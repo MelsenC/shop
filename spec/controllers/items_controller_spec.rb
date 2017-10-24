@@ -36,4 +36,12 @@ RSpec.describe ItemsController, type: :controller do
       expect(Item.last.title).to eq("Fix things")
     end
   end
+
+  describe "item#destroy" do
+    it "should allow tasks to be deleted" do
+      item = FactoryGirl.create(:item, done: false, title: "Something insignificant")
+      delete :destroy, id: item.id
+      expect(Item.where(id:item.id).exists?).to eq(false)
+    end
+  end
 end

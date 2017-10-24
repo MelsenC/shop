@@ -5,14 +5,16 @@ $(function() {
   // of the task and produces an HTML representation using
   // <li> tags    
   function itemHtml(item) {
-      var checkedStatus = item.done ? "checked" : "";
-      var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' + 
-        " data-id='" + item.id + "'" +
-        checkedStatus +
-        '><label>' +
-        item.title +
-        '</label></div></li>';
-      return liElement;
+    var checkedStatus = item.done ? "checked" : "";
+    var liClass = item.done ? "completed" : "";
+    var liElement = '<li id="listItem-' + item.id + '" class="' + liClass + '">' +
+      '<div class="view"><input class="toggle" type="checkbox"' + 
+      " data-id='" + item.id + "'" +
+      checkedStatus +
+      '><label>' +
+      item.title +
+      '</label></div></li>';
+    return liElement;
   }
 
 
@@ -30,7 +32,12 @@ $(function() {
       item: {
         done: doneValue
       }
-    });
+    }).success(function(data) {
+      var liHtml = itemHtml(data);
+      var $li = $("#listItem-" + data.id);
+      $li.replaceWith(liHtml);
+      $('.toggle').change(toggleItem);
+    } );
   }
 
   $.get("/items").success( function(data) {

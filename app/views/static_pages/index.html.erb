@@ -12,10 +12,7 @@
 
 <script>
   $(function() {
-    $.get("/items").success( function(data) {
-      var htmlString = "";
-
-      $.each(data, function(index, item){
+    function itemHtml(item) {
         var checkedStatus = item.done ? "checked" : "";
         var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' + 
           " data-id='" + item.id + "'" +
@@ -23,25 +20,32 @@
           '><label>' +
           item.title +
           '</label></div></li>';
-        htmlString += liElement;
+        return liElement;
+    }
+
+    function toggleItem(e) {
+      var itemId = $(e.target).data("id");
+      
+      var doneValue = Boolean($(e.target).is(':checked'));
+      
+      $.post("/items/" + itemId, {
+        _method: "PUT",
+        item: {
+          done: doneValue
+        }
+      });
+    }
+
+    $.get("/items").success( function(data) {
+      var htmlString = "";
+
+      $.each(data, function(index, item){
+        htmlString += itemHtml(item);
       });
       var ulItems = $('.shopping-list');
       ulItems.html(htmlString);
 
-      $('.toggle').change(function(e) {
-        var itemId = $(e.target).data("id");
-        console.log(itemId);
-
-        var doneValue = Boolean($(e.target).is(':checked'));
-        console.log("done:", doneValue);
-
-        $.post("/items/" + itemId, {
-          _method: "PUT",
-          item: {
-            done: doneValue
-          }
-        });
-      });
+      $('.toggle').change(toggleItem);
     });
   });
 </script>

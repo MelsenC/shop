@@ -1,6 +1,9 @@
 <section class="shopapp">
   <header class="header">
     <h1>Shopping List</h1>
+    <form id="new-form">
+      <input type="text" class="new-item">
+    </form>
   </header>
 
   <section class="main">
@@ -12,6 +15,17 @@
 
 <script>
   $(function() {
+    $('#new-form').submit(function(event) {
+      event.preventDefault();
+      var textbox = $('.new-item');
+      console.log("Task: ", textbox.val());
+    });
+
+
+
+    // The itemHtml method takes in a JavaScript representation
+    // of the task and produces an HTML representation using
+    // <li> tags    
     function itemHtml(item) {
         var checkedStatus = item.done ? "checked" : "";
         var liElement = '<li><div class="view"><input class="toggle" type="checkbox"' + 
@@ -23,6 +37,11 @@
         return liElement;
     }
 
+
+    // toggleItem takes in an HTML representation of the
+    // an event that fires from an HTML representation of
+    // the toggle checkbox and  performs an API request to toggle
+    // the value of the `done` field
     function toggleItem(e) {
       var itemId = $(e.target).data("id");
       

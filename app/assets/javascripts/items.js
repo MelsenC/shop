@@ -59,6 +59,7 @@ $(function() {
       var ulItems = $('.shopping-list');
       ulItems.append(htmlString);
       $('.toggle').click(toggleItem);
+      $('.new-item').val('');
     });
   });
 

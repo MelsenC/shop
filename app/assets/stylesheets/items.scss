@@ -25,7 +25,7 @@ button {
 }
 
 body {
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font: 14px 'Varela Round', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4em;
   background: #f5f5f5;
   color: #4d4d4d;
@@ -73,12 +73,12 @@ body {
 
 .shopapp h1 {
   position: absolute;
-  top: -155px;
+  top: -125px;
   width: 100%;
-  font-size: 100px;
-  font-weight: 100;
+  font-family: 'Shrikhand', cursive;
+  font-size: 70px;
   text-align: center;
-  color: rgba(175, 47, 47, 0.15);
+  color: rgba(47, 65, 80, 0.45);
   -webkit-text-rendering: optimizeLegibility;
   -moz-text-rendering: optimizeLegibility;
   text-rendering: optimizeLegibility;

@@ -13,7 +13,7 @@ $(function() {
       checkedStatus +
       '><label>' +
       item.title +
-      '</label></div></li>';
+      '</label><button class="destroy"></button></div></li>';
     return liElement;
   }
 
@@ -69,5 +69,9 @@ $(function() {
       $('.new-item').val('');
     });
   });
+
+  function deleteItem(item) {
+    
+  }
 
 });
